@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="ドラクエ10用経験値計算サイト">
+    <meta property="og:title"       content="ドラクエ10アストルティアナビ">
+    <meta property="og:description" content="ドラクエ10の国、アストルティア。アストルティアの歩き方がわかるナビゲーションツール" />
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content="https://kanzakisho5.github.io/DQX_Navi/" />
+    <meta property="og:image"       content="https://kanzakisho5.github.io/DQX_navi/img/og_img.jpg" />
+    <meta name="twitter:card"       content="summary" />
+    <meta name="twitter:site"       content="@liebecas" />
+    <meta name="twitter:creator"    content="@liebecas" />
+
+    <link rel="stylesheet" href="./css/style.css">
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script src="./js/main.js"></script>
+    <title>ドラクエ10アストルティアナビ</title>
+</head>
+<body>
+    <hi>ドラクエ10アストルティアナビ</hi>
+    <div class="container">
+        <ul>
+            <li>
+                <dl>
+                    <dt><label for="startPosName">出発地点</label></dt>
+                    <dd>
+                        <input type="text" id="startPosName" list="posList">
+                    </dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><label for="endPosName">到着地点</label></dt>
+                    <dd><input type="text" id="endPosName" list="posList"></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+    <datalist id="posList">
+    </datalist>
+</body>
+</html>
