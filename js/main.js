@@ -4,68 +4,42 @@ $(function(){
     const $startPosName = $("#startPosName");
     const $endPosName = $("#endPosName");
     
-    const locationName = {
-        オーグリード:[
-            "ランガーオ山地",
-            "グレン領東",
-            "グレン領西",
-            "ベコン渓谷",
-            "ゲルト海峡",
-            "ランドンフット",
-            "ランドン山脈",
-            "ランドン山脈山頂",
-            "ザマ岬",
-            "ガートラント領",
-            "ギルザッド地方",
-            "オルセコ高地",
-            "ラギ雪原",
-            "バドリー岩石地帯",
-            "ゴズ渓谷",
-            "ロンダの氷穴",
-            "海賊のアジト跡",
-            "古代オルセコ闘技場",
-            "ナグアの洞くつ",
-            "ダズの岩穴",
-            "トガス岩道",
-            "狩人のほら穴",
-            "ランガーオ村",
-            "グレン城下町",
-            "グレン城",
-            "ガートラント城下町・城",
-            "獅子門",
-            "橋上の宿",
-            "ザマの烽火台",
-            "入り江の集落"
-        ],
-        プクランド:[
-            "プクレット地方",
-            "ポーポラ地方",
-            "オルフェア地方東",
-            "オルフェア地方西",
-            "リンクル地方",
-            "風車の丘",
-            "メギストリス領",
-            "ポポリアきのこ山",
-            "エピステーサ丘陵",
-            "チョッピ荒野",
-            "オルファの丘",
-            "賢者の隠れ家",
-            "けがれの谷",
-            "ミュルエルの森",
-            "ポポラパの洞くつ",
-            "ペシュヤ地下空洞",
-            "オルッパ地下洞くつ",
-            "プペラトンネル",
-            "メギラザの洞くつ",
-            "魔瘴調査区画",
-            "プクレットの村",
-            "オルフェアの町",
-            "メギストリスの都・城",
-            "妖精図書館",
-            "キラキラ大風車塔",
-            "ピィピのお宿",
-            "荒野の休憩所",
-        ]
+    const request = new XMLHttpRequest();
+    request.open("GET", "./json/map.json");
+    request.responseType = "json";
+    request.send();
+
+    var locationNodes = [];
+    
+    request.onload = function () {
+        var temp = request.response;
+        for(let cont in temp){
+            for(let mapName in temp[cont]){
+                console.log(temp[cont][mapName]);
+                locationNodes.push(new Node(mapName));
+            }
+        }
+        //console.log(temp);
+        let count = 0;
+        // 大陸別ループ
+        for(let cont in temp){
+            // マップ名ループ
+            for(let mapName in temp[cont]){
+                // 隣のマップループ
+                for(let connectNode in temp[cont][mapName]){
+                    for(let i = 0; i < locationNodes.length; i++){
+                        if(temp[cont][mapName][connectNode] == locationNodes[i].id){
+                            console.log("name= "+ temp[cont][mapName][connectNode] + ", count= "+ count +", i= "+ i);
+                            locationNodes[count].edgeNode.push(locationNodes[i]);
+                        }
+                    }
+                }
+                count++;
+                //locationNode.push(new Node(mapName));
+            }
+        }
+        
+        init();
     };
     
     var startPos = "";
