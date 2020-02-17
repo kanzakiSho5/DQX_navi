@@ -14,7 +14,32 @@ $(function(){
     var locationNodes = [];
     
     request.onload = function () {
+        initNodes();
+        
+        init();
+    };
+    
+    var isUseMega = true,isUseBasi = true;
+    
+    var startPos,endPos,startPosCont,endPosCont;
+
+    function Node(id){
+        this.edgeNode = [];
+        this.edgeCost = [];
+        this.done = false;
+        this.cost = -1;
+        this.id = id;
+        this.previousNode = null;
+    }
+    
+    Node.prototype.addNode = function(node, cost){
+        this.edgeNode.push(node);
+        this.edgeCost.push(cost);
+    };
+    
+    function initNodes(){
         var temp = request.response;
+        locationNodes = [];
         for(let cont in temp){
             for(let mapName in temp[cont]){
                 console.log(temp[cont][mapName]);
@@ -40,25 +65,7 @@ $(function(){
                 //locationNode.push(new Node(mapName));
             }
         }
-        
-        init();
-    };
-    
-    var startPos,endPos,startPosCont,endPosCont;
-
-    function Node(id){
-        this.edgeNode = [];
-        this.edgeCost = [];
-        this.done = false;
-        this.cost = -1;
-        this.id = id;
-        this.previousNode = null;
     }
-    
-    Node.prototype.addNode = function(node, cost){
-        this.edgeNode.push(node);
-        this.edgeCost.push(cost);
-    };
     
     function init(){
         createList();
@@ -73,14 +80,20 @@ $(function(){
     
     function FindRoute(){
         
-        if(!startPos || !endPos)
+        if(!startPos || !endPos){
+            console.log("ERROR!!!!");
             return;
-        
-        var nodes = locationNodes;
-        for(let key in locationNodes)
+        }
+            
+        let nodes = locationNodes;
+        for(let key in nodes)
         {
-            if(locationNodes[key].id == startPos)
-                locationNodes[key].cost = 0;
+            nodes[key].cost = -1;
+            if(nodes[key].id === startPos) {
+                //console.log("------------------startPos= "+ startPos);
+                nodes[key].cost = 0;
+            }
+            //console.log(nodes[key].id + "  "+ nodes[key].cost);
         }
         
         while(true){
