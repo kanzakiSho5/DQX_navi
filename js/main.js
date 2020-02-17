@@ -77,7 +77,6 @@ $(function(){
         }
     }
     
-    
     function FindRoute(){
         
         if(!startPos || !endPos){
@@ -114,7 +113,6 @@ $(function(){
                     processNode = node;
                 }
             }
-            //console.log(processNode);
             if(!processNode){
                 break;
             }
@@ -127,7 +125,7 @@ $(function(){
                 let cost = processNode.cost + 1;
                 
                 let needsUpdate = (node.cost < 0) || (node.cost > cost);
-                console.log("" + i + ", node.cost= "+ node.cost + ", cost= "+ cost + ", needsUpdate= "+ needsUpdate);
+                //console.log("" + i + ", node.cost= "+ node.cost + ", cost= "+ cost + ", needsUpdate= "+ needsUpdate);
                 if(needsUpdate){
                     node.cost = cost;
                     node.previousNode = processNode;
@@ -169,26 +167,11 @@ $(function(){
     $startPosName.on("keyup", function(e){
         console.log("On change Value("+ $startPosName.val() +")");
         startPos = $startPosName.val();
-        for(var key in locationNodes){
-            if(locationNodes[key][startPos]) {
-                console.log(key);
-                startPosCont = key;
-                break;
-            }
-        }
-        
     });
     
     $endPosName.on("keyup", function(e){
         console.log("On change Value("+ $endPosName.val() +")");
         endPos = $endPosName.val();
-        for(var key in locationNodes){
-            if(locationNodes[key][startPos]) {
-                console.log(key);
-                endPosCont = key;
-                break;
-            }
-        }
     });
     
     $retAns.on("click", function (e) {
