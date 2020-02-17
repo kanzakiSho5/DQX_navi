@@ -49,7 +49,7 @@ $(function(){
                 if(!isUseMega && mapName === "メガルーラ")
                     continue;
 
-                console.log(temp[cont][mapName]);
+                //console.log(temp[cont][mapName]);
                 locationNodes.push(new Node(mapName));
             }
         }
@@ -61,22 +61,39 @@ $(function(){
             for(let mapName in temp[cont]){
                 if(!isUseBasi && mapName === "バシッ子")
                     continue;
+                else if(isUseBasi && mapName !== "その他"){
+                    for(let i = 0; i < locationNodes.length; i++){
+                        if("バシッ子" === locationNodes[i].id){
+                            //console.log("name= "+ temp[cont][mapName][connectNode] + ", count= "+ count +", i= "+ i);
+                            locationNodes[count].addNode(locationNodes[i], 1);
+                        }
+                    }
+                }
                 if(!isUseMega && mapName === "メガルーラ")
                     continue;
+                else if(isUseMega && mapName !== "その他"){
+                    for(let i = 0; i < locationNodes.length; i++){
+                        if("メガルーラ" === locationNodes[i].id){
+                            //console.log("name= "+ temp[cont][mapName][connectNode] + ", count= "+ count +", i= "+ i);
+                            locationNodes[count].addNode(locationNodes[i], 1);
+                        }
+                    }
+                }
                 
                 // 隣のマップループ
                 for(let connectNode in temp[cont][mapName]){
                     for(let i = 0; i < locationNodes.length; i++){
-                        if(temp[cont][mapName][connectNode] == locationNodes[i].id){
-                            console.log("name= "+ temp[cont][mapName][connectNode] + ", count= "+ count +", i= "+ i);
-                            locationNodes[count].edgeNode.push(locationNodes[i]);
+                        if(temp[cont][mapName][connectNode] === locationNodes[i].id){
+                            //console.log("name= "+ temp[cont][mapName][connectNode] + ", count= "+ count +", i= "+ i);
+                            locationNodes[count].addNode(locationNodes[i], 1);
                         }
                     }
                 }
                 count++;
-                //locationNode.push(new Node(mapName));
             }
         }
+        
+        console.log(locationNodes);
     }
     
     function init(){
