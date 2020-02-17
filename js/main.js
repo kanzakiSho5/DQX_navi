@@ -5,6 +5,8 @@ $(function(){
     const $endPosName = $("#endPosName");
     const $retAns = $("#retAns");
     const $ansWindow = $("#ansWindow");
+    const $isUseMega = $("#isUseMega");
+    const $isUseBasi = $("#isUseBasi");
     
     const request = new XMLHttpRequest();
     request.open("GET", "./json/map.json");
@@ -42,6 +44,11 @@ $(function(){
         locationNodes = [];
         for(let cont in temp){
             for(let mapName in temp[cont]){
+                if(!isUseBasi && mapName === "バシッ子")
+                    continue;
+                if(!isUseMega && mapName === "メガルーラ")
+                    continue;
+
                 console.log(temp[cont][mapName]);
                 locationNodes.push(new Node(mapName));
             }
@@ -52,6 +59,11 @@ $(function(){
         for(let cont in temp){
             // マップ名ループ
             for(let mapName in temp[cont]){
+                if(!isUseBasi && mapName === "バシッ子")
+                    continue;
+                if(!isUseMega && mapName === "メガルーラ")
+                    continue;
+                
                 // 隣のマップループ
                 for(let connectNode in temp[cont][mapName]){
                     for(let i = 0; i < locationNodes.length; i++){
@@ -72,6 +84,7 @@ $(function(){
     }
     
     function createList(){
+        $posList.text("");
         for(let key in locationNodes){
             $posList.append("<option value='"+ locationNodes[key].id +"'></option>");
         }
@@ -174,7 +187,21 @@ $(function(){
         endPos = $endPosName.val();
     });
     
+    $isUseBasi.on("click",function(e){
+        isUseBasi = $isUseBasi.prop("checked");
+        initNodes();
+        createList();
+    });
+    
+    $isUseMega.on("click", function (e) {
+        isUseMega = $isUseMega.prop("checked");
+        initNodes();
+        createList();
+    });
+    
     $retAns.on("click", function (e) {
-        console.log(FindRoute());
+        console.log("isUseMega= "+ isUseMega +", \nisUseBasi= "+ isUseBasi);
+        initNodes();
+        FindRoute();
     })
 });
