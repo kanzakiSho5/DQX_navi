@@ -21,7 +21,7 @@ $(function(){
         init();
     };
     
-    var isUseMega = true,isUseBasi = true;
+    var isUseMega = true,isUseBasi = false;
     
     var startPos,endPos,startPosCont,endPosCont;
 
