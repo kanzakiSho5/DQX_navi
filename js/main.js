@@ -194,12 +194,12 @@ $(function(){
         $ansWindow.text(path);
     }
     
-    $startPosName.on("keyup", function(e){
+    $startPosName.on("change", function(e){
         console.log("On change Value("+ $startPosName.val() +")");
         startPos = $startPosName.val();
     });
     
-    $endPosName.on("keyup", function(e){
+    $endPosName.on("change", function(e){
         console.log("On change Value("+ $endPosName.val() +")");
         endPos = $endPosName.val();
     });
