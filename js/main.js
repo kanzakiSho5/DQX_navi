@@ -65,7 +65,7 @@ $(function(){
                     for(let i = 0; i < locationNodes.length; i++){
                         if("バシッ子" === locationNodes[i].id){
                             //console.log("name= "+ temp[cont][mapName][connectNode] + ", count= "+ count +", i= "+ i);
-                            locationNodes[count].addNode(locationNodes[i], 1);
+                            locationNodes[count].addNode(locationNodes[i], 2);
                         }
                     }
                 }
@@ -184,22 +184,22 @@ $(function(){
                 //path = ' Start' + path;
                 break;
             }
-            path = nextNode.id + ' -> '+ path;
+            path = nextNode.id + ' <br> ↓ <br>'+ path;
             currentNode = nextNode;
         }
 
         console.log(path);
         console.log('=====================');
         
-        $ansWindow.text(path);
+        $ansWindow.html(path);
     }
     
-    $startPosName.on("keyup", function(e){
+    $startPosName.on("change", function(e){
         console.log("On change Value("+ $startPosName.val() +")");
         startPos = $startPosName.val();
     });
     
-    $endPosName.on("keyup", function(e){
+    $endPosName.on("change", function(e){
         console.log("On change Value("+ $endPosName.val() +")");
         endPos = $endPosName.val();
     });
