@@ -2,6 +2,7 @@
 $large-font-size : 30px;
 
 html,body{
+  transition: color, background-color 0.3s;
   margin: 0;
 }
 
@@ -22,6 +23,10 @@ h1{
   li{
     list-style: none;
     width: 100%;
+  }
+  
+  input[type="text"]{
+    transition: color, background-color .3s;
   }
 
   input[type="checkbox"] {
@@ -95,6 +100,19 @@ h1{
     background: #ffffff;
     -webkit-transform: rotate(-53deg);
     -webkit-transform-origin: left center;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body{
+    background-color: #15202B;
+    color: #e2e2e2;
+    
+    input[type="text"]{
+      background-color: #333333;
+      border-style: none;
+      color: #e2e2e2;
+    }
   }
 }
 
